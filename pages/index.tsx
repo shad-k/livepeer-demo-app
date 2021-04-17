@@ -1,10 +1,8 @@
 import React from "react";
 
 export default function App() {
-  const [demoState, setCurrentState] = React.useState(0);
-
   return (
-    <main className="container">
+    <main className="container pb-12 h-screen">
       <header className="w-screen p-3 flex justify-between items-center">
         <a
           href="https://livepeer.com/docs/"
@@ -20,6 +18,13 @@ export default function App() {
           Reset Demo
         </button>
       </header>
+      <footer className="fixed bottom-0 left-0 w-full h-12 bg-black text-white flex items-center justify-center">
+        Made with&nbsp;
+        <a href="https://livepeer.com/docs/" className="text-livepeer text-xl">
+          Livepeer.com
+        </a>
+        &nbsp;API
+      </footer>
     </main>
   );
 }
