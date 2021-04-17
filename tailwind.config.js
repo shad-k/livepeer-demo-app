@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
@@ -5,8 +6,11 @@ module.exports = {
   },
   purge: [],
   theme: {
-    textColor: {
-      primary: "#0070f3",
+    colors: {
+      ...colors,
+      livepeer: {
+        DEFAULT: "#00EB88",
+      },
     },
     extend: {},
   },
