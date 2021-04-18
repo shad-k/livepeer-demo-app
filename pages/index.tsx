@@ -70,7 +70,12 @@ export default function App() {
           Reset Demo
         </button>
       </header>
-      <AppBody state={state} dispatch={dispatch} />
+      <AppBody
+        state={state}
+        setApiKey={(apiKey) =>
+          dispatch({ type: "SUBMIT_API_KEY", payload: { apiKey } })
+        }
+      />
       <footer className="fixed bottom-0 left-0 w-full h-12 bg-black text-white flex items-center justify-center">
         Made with&nbsp;
         <a href="https://livepeer.com/docs/" className="text-livepeer text-xl">
