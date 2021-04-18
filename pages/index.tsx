@@ -75,6 +75,7 @@ export default function App() {
         setApiKey={(apiKey) =>
           dispatch({ type: "SUBMIT_API_KEY", payload: { apiKey } })
         }
+        createStream={() => dispatch({ type: "CREATE_CLICKED" })}
       />
       <footer className="fixed bottom-0 left-0 w-full h-12 bg-black text-white flex items-center justify-center">
         Made with&nbsp;
