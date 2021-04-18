@@ -4,7 +4,7 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: ["./src/**/*.html", "./src/**/*.tsx"],
+  purge: [],
   theme: {
     colors: {
       ...colors,
