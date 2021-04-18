@@ -91,8 +91,8 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
     case APP_STATES.WAITING_FOR_VIDEO:
     case APP_STATES.SHOW_VIDEO:
       return (
-        <div className="w-full h-3/5 flex flex-col items-center justify-center">
-          <div className="relative bg-black h-3/5 w-full">
+        <div className="container w-full h-3/5 lg:h-4/5 flex flex-col items-center justify-center">
+          <div className="relative bg-black h-3/5 w-full xl:w-3/5">
             <video id="video" className="h-full w-full" controls />
             <div className="bg-white rounded-xl flex items-center justify-center absolute right-2 top-2 p-1 text-xs">
               <div
@@ -104,8 +104,8 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
             </div>
           </div>
 
-          <div className="w-11/12 border border-dashed p-2 m-4 flex flex-col text-sm">
-            <div className="flex items-center justify-between mt-2 break-all	">
+          <div className="w-11/12 lg:w-full xl:w-3/5 border border-dashed p-2 m-4 flex flex-col text-sm">
+            <div className="flex items-center justify-between mt-2 break-all">
               <span>
                 Playback URL:
                 <br />
@@ -122,7 +122,7 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
                 Copy
               </button>
             </div>
-            <div className="flex items-center justify-between mt-2 break-all	">
+            <div className="flex items-center justify-between mt-2 break-all">
               <span>
                 Injest URL:
                 <br />
