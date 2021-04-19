@@ -92,7 +92,7 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
     case APP_STATES.SHOW_VIDEO:
       return (
         <div className="container w-full h-3/5 lg:h-4/5 flex flex-col items-center justify-center">
-          <div className="relative bg-black h-3/5 w-full xl:w-3/5">
+          <div className="relative bg-black h-3/5 w-full xl:w-3/5 overflow-hidden">
             <video id="video" className="h-full w-full" controls />
             <div className="bg-white rounded-xl flex items-center justify-center absolute right-2 top-2 p-1 text-xs">
               <div
