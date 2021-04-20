@@ -62,7 +62,6 @@ export default function App() {
     if (state.appState === APP_STATES.CREATING_STREAM) {
       (async function () {
         const streamCreateResponse = await createStream(state.apiKey);
-        console.log(streamCreateResponse);
         if (streamCreateResponse.data) {
           const {
             id: streamId,

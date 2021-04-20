@@ -45,14 +45,27 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
           var errorType = data.type;
           var errorDetails = data.details;
           var errorFatal = data.fatal;
-          console.log(errorType, errorDetails, errorFatal);
-          switch (data.details) {
-            case Hls.ErrorDetails.FRAG_LOAD_ERROR:
-              // ....
-              break;
-            default:
-              break;
+          if (errorFatal) {
+            switch (errorType) {
+              case Hls.ErrorTypes.NETWORK_ERROR:
+                // try to recover network error
+                console.log("fatal network error encountered, try to recover");
+                setTimeout(() => {
+                  hls.loadSource(videoSrc);
+                }, 10000);
+                // hls.startLoad();
+                break;
+              case Hls.ErrorTypes.MEDIA_ERROR:
+                console.log("fatal media error encountered, try to recover");
+                hls.recoverMediaError();
+                break;
+              default:
+                // cannot recover
+                hls.destroy();
+                break;
+            }
           }
+          console.log(errorType, errorDetails, errorFatal);
         });
       } else if (
         (video as HTMLVideoElement).canPlayType("application/vnd.apple.mpegurl")
