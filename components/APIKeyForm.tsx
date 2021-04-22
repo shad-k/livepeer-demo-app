@@ -13,7 +13,7 @@ const APIKeyForm: React.FC<Props> = ({ setApiKey }) => {
 
   return (
     <form
-      className="px-4 py-2 flex justify-center flex-col"
+      className="px-4 h-3/5 flex justify-center flex-col lg:max-w-screen-md m-auto"
       onSubmit={submitHandler}
     >
       <input

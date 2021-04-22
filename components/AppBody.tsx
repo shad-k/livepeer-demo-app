@@ -65,7 +65,6 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
                 break;
             }
           }
-          console.log(errorType, errorDetails, errorFatal);
         });
       } else if (
         (video as HTMLVideoElement).canPlayType("application/vnd.apple.mpegurl")
