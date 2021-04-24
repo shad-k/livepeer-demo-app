@@ -102,8 +102,8 @@ export default function App() {
   }, [state.appState]);
 
   return (
-    <main className="container pb-12 h-screen m-auto">
-      <header className="w-full p-3 flex justify-between items-center">
+    <main className="container pb-12 h-screen m-auto pt-24 lg:pt-40">
+      <header className="w-full p-3 flex justify-between items-center fixed top-0 left-0 z-10 bg-white">
         <a
           href="https://livepeer.com/docs/"
           target="_blank"
