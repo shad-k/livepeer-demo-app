@@ -164,6 +164,11 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
             </div>
           </div>
 
+          <div className="w-11/12 lg:w-full xl:w-3/5 lg:p-0 mt-2 text-red-500 underline text-left text-sm">
+            <span className="font-bold">Note:&nbsp;</span> To start a video
+            stream, please use a broadcaster software like OBS/Streamyard on
+            desktop, or Larix on mobile
+          </div>
           <div className="w-11/12 lg:w-full xl:w-3/5 border border-dashed p-2 m-4 flex flex-col text-sm">
             <div className="flex items-center justify-between mt-2 break-all">
               <span>
