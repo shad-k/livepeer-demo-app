@@ -108,10 +108,9 @@ export default function App() {
           href="https://livepeer.com/docs/"
           target="_blank"
           rel="noopener, nofollow"
-          className="logo flex flex-col w-2/5 lg:w-1/5"
+          className="logo flex flex-col flex-1 lg:w-1/5 lg:text-center"
         >
-          <img src="/logo.svg"></img>
-          <span className="font-bold">API Demo</span>
+          <h1 className="font-bold text-xl">Livepeer API Demo</h1>
         </a>
 
         <button
