@@ -203,7 +203,8 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
               onClick={() => setShowRequest((val) => !val)}
               className="text-gray-500 text-sm text-center w-full mb-2"
             >
-              {showRequest ? "Hide" : "Show"} POST Request{" "}
+              {showRequest ? "Hide" : "Show"} POST /stream request creating a
+              stream{" "}
               <span className="text-xs">
                 {showRequest ? <>&#9650;</> : <>&#9660;</>}
               </span>{" "}

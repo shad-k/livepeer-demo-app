@@ -9,7 +9,7 @@ module.exports = {
     colors: {
       ...colors,
       livepeer: {
-        DEFAULT: "#00EB88",
+        DEFAULT: "#943CFF",
       },
     },
     extend: {},

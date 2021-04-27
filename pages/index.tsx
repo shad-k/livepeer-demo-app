@@ -108,9 +108,9 @@ export default function App() {
           href="https://livepeer.com/docs/"
           target="_blank"
           rel="noopener, nofollow"
-          className="logo flex flex-col flex-1 lg:w-1/5 lg:text-center"
+          className="logo flex flex-col flex-1 lg:w-1/5"
         >
-          <h1 className="font-bold text-xl">Livepeer API Demo</h1>
+          <h1 className="font-bold text-xl">Livepeer.com API Demo</h1>
         </a>
 
         <button
@@ -127,8 +127,8 @@ export default function App() {
         }
         createStream={() => dispatch({ type: "CREATE_CLICKED" })}
       />
-      <footer className="fixed bottom-0 left-0 w-full h-12 bg-black text-white flex items-center justify-center">
-        Made with&nbsp;
+      <footer className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center">
+        Made with the&nbsp;
         <a href="https://livepeer.com/docs/" className="text-livepeer text-xl">
           Livepeer.com
         </a>
