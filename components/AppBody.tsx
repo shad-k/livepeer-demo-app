@@ -1,5 +1,9 @@
 import React from "react";
-import Hls from "hls.js";
+import videojs from "video.js";
+import "videojs-contrib-hls";
+import "videojs-contrib-quality-levels";
+import "videojs-hls-quality-selector";
+import "video.js/dist/video-js.min.css";
 
 import APIKeyForm from "./APIKeyForm";
 
@@ -22,64 +26,34 @@ const copyTextToClipboard = (text: string) => {
 const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
   const { playbackId, streamIsActive, streamKey } = state;
   const [showRequest, setShowRequest] = React.useState(false);
-  React.useEffect(() => {
-    let hls;
-    if (streamIsActive && playbackId) {
-      const video = document.getElementById("video");
-      const videoSrc = `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`;
-      if (Hls.isSupported()) {
-        hls = new Hls();
-        // bind them together
-        hls.attachMedia(video as HTMLVideoElement);
-        // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-          console.log("video and hls.js are now bound together !");
-          hls.loadSource(videoSrc);
-          hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            console.log(
-              "manifest loaded, found " + data.levels.length + " quality level"
-            );
-            (video as HTMLVideoElement).play();
-          });
-        });
-        hls.on(Hls.Events.ERROR, function (event, data) {
-          var errorType = data.type;
-          var errorDetails = data.details;
-          var errorFatal = data.fatal;
-          if (errorFatal) {
-            switch (errorType) {
-              case Hls.ErrorTypes.NETWORK_ERROR:
-                // try to recover network error
-                console.log("fatal network error encountered, try to recover");
-                setTimeout(() => {
-                  hls.loadSource(videoSrc);
-                }, 10000);
-                // hls.startLoad();
-                break;
-              case Hls.ErrorTypes.MEDIA_ERROR:
-                console.log("fatal media error encountered, try to recover");
-                hls.recoverMediaError();
-                break;
-              default:
-                // cannot recover
-                hls.destroy();
-                break;
-            }
-          }
-        });
-      } else if (
-        (video as HTMLVideoElement).canPlayType("application/vnd.apple.mpegurl")
-      ) {
-        (video as HTMLVideoElement).src = videoSrc;
-      }
-    }
+  const [videoEl, setVideoEl] = React.useState(null);
 
-    return () => {
-      if (hls) {
-        hls.destroy();
-      }
-    };
+  const onVideo = React.useCallback((el) => {
+    setVideoEl(el);
+  }, []);
+
+  React.useEffect(() => {
+    if (videoEl == null) return;
+    if (streamIsActive && playbackId) {
+      const player = videojs(videoEl, {
+        autoplay: true,
+        controls: true,
+        sources: [
+          {
+            src: `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`,
+          },
+        ],
+      });
+
+      player.hlsQualitySelector();
+
+      player.on("error", () => {
+        console.log("error");
+        player.src(`https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`);
+      });
+    }
   }, [streamIsActive]);
+
   switch (state.appState) {
     case APP_STATES.API_KEY:
       return <APIKeyForm setApiKey={setApiKey} />;
@@ -152,8 +126,16 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
       );
       return (
         <div className="container w-full flex flex-col items-center overflow-auto pb-14">
-          <div className="relative bg-black h-56 lg:h-auto w-full xl:w-3/5 overflow-hidden">
-            <video id="video" className="h-full w-full" controls />
+          <div className="relative bg-black h-56 lg:h-96 w-full xl:w-3/5 overflow-hidden">
+            <div data-vjs-player>
+              <video
+                id="video"
+                ref={onVideo}
+                className="h-full w-full video-js vjs-theme-city"
+                controls
+                playsInline
+              />
+            </div>
             <div className="bg-white rounded-xl flex items-center justify-center absolute right-2 top-2 p-1 text-xs">
               <div
                 className={`animate-pulse ${
