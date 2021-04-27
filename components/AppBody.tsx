@@ -142,16 +142,44 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
                   streamIsActive ? "bg-green-700" : "bg-yellow-600"
                 } h-2 w-2 mr-2 rounded-full`}
               ></div>
-              {streamIsActive ? "Live" : "Paused"}
+              {streamIsActive ? "Live" : "Waiting for Video"}
             </div>
           </div>
 
-          <div className="w-11/12 lg:w-full xl:w-3/5 lg:p-0 mt-2 text-red-500 underline text-left text-sm">
+          <div className="w-11/12 lg:w-full xl:w-3/5 lg:p-0 mt-2 text-red-500 text-left text-sm">
             <span className="font-bold">Note:&nbsp;</span> To start a video
             stream, please use a broadcaster software like OBS/Streamyard on
             desktop, or Larix on mobile
           </div>
           <div className="w-11/12 lg:w-full xl:w-3/5 border border-dashed p-2 m-4 flex flex-col text-sm">
+            <div className="flex items-center justify-between mt-2 break-all">
+              <span>
+                Ingest URL:
+                <br />
+                rtmp://rtmp.livepeer.com/live/
+              </span>
+              <button
+                onClick={() =>
+                  copyTextToClipboard(`rtmp://rtmp.livepeer.com/live/`)
+                }
+                className="border ml-1 p-1 rounded text-sm break-normal"
+              >
+                Copy
+              </button>
+            </div>
+            <div className="flex items-center justify-between mt-2 break-all mb-6">
+              <span>
+                Stream Key:
+                <br />
+                {streamKey}
+              </span>
+              <button
+                onClick={() => copyTextToClipboard(streamKey)}
+                className="border ml-1 p-1 rounded text-sm break-normal"
+              >
+                Copy
+              </button>
+            </div>
             <div className="flex items-center justify-between mt-2 break-all">
               <span>
                 Playback URL:
@@ -162,23 +190,6 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
                 onClick={() =>
                   copyTextToClipboard(
                     `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`
-                  )
-                }
-                className="border ml-1 p-1 rounded text-sm break-normal"
-              >
-                Copy
-              </button>
-            </div>
-            <div className="flex items-center justify-between mt-2 break-all">
-              <span>
-                Injest URL:
-                <br />
-                rtmp://rtmp.livepeer.com/live/{streamKey}
-              </span>
-              <button
-                onClick={() =>
-                  copyTextToClipboard(
-                    `rtmp://rtmp.livepeer.com/live/${streamKey}`
                   )
                 }
                 className="border ml-1 p-1 rounded text-sm break-normal"
