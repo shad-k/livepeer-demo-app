@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   playbackId: null,
   streamKey: null,
   streamIsActive: false,
+  error: null,
 };
 
 const reducer = (state, action) => {
@@ -50,6 +51,11 @@ const reducer = (state, action) => {
       return {
         ...INITIAL_STATE,
       };
+    case "INVALID_API_KEY":
+      return {
+        ...state,
+        error: action.payload.message,
+      };
     default:
       break;
   }
@@ -61,21 +67,41 @@ export default function App() {
   React.useEffect(() => {
     if (state.appState === APP_STATES.CREATING_STREAM) {
       (async function () {
-        const streamCreateResponse = await createStream(state.apiKey);
-        if (streamCreateResponse.data) {
-          const {
-            id: streamId,
-            playbackId,
-            streamKey,
-          } = streamCreateResponse.data;
-          dispatch({
-            type: "STREAM_CREATED",
-            payload: {
-              streamId,
+        try {
+          const streamCreateResponse = await createStream(state.apiKey);
+          if (streamCreateResponse.data) {
+            const {
+              id: streamId,
               playbackId,
               streamKey,
-            },
-          });
+            } = streamCreateResponse.data;
+            dispatch({
+              type: "STREAM_CREATED",
+              payload: {
+                streamId,
+                playbackId,
+                streamKey,
+              },
+            });
+          }
+        } catch (error) {
+          if (error.response.status === 403) {
+            dispatch({
+              type: "INVALID_API_KEY",
+              payload: {
+                message:
+                  "Invalid API Key. Please try again with right API key!",
+              },
+            });
+          } else {
+            dispatch({
+              type: "INVALID_API_KEY",
+              payload: {
+                message:
+                  "Something went wrong! Please try again after sometime",
+              },
+            });
+          }
         }
       })();
     }
@@ -134,6 +160,19 @@ export default function App() {
         </a>
         &nbsp;API
       </footer>
+      {state.error && (
+        <div className="bg-black bg-opacity-60 flex items-center justify-center fixed top-0 left-0 h-screen w-screen">
+          <div className="flex flex-col w-1/3 h-56 bg-white p-12 items-center text-center text-lg rounded">
+            {state.error}
+            <button
+              className="border p-2 w-1/3 rounded border-livepeer hover:bg-livepeer hover:text-white mt-4"
+              onClick={() => dispatch({ type: "RESET_DEMO_CLICKED" })}
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

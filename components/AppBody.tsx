@@ -48,7 +48,6 @@ const AppBody: React.FC<Props> = ({ state, setApiKey, createStream }) => {
       player.hlsQualitySelector();
 
       player.on("error", () => {
-        console.log("error");
         player.src(`https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`);
       });
     }

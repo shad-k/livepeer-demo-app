@@ -30,6 +30,9 @@ export default async (req, res) => {
       }
     } catch (error) {
       res.statusCode = 500;
+      if (error.response.status === 403) {
+        res.statusCode = 403;
+      }
       res.json({ error });
     }
   }
