@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project starter that supports TypeScript, SASS and TailwindCSS.
+# Livepeer.com API Demo
 
-## Getting Started
+This is a demo app to showcase how to use Livepeer.com APIs to create a live stream. The app enables the user to create a stream and play it back.
 
-Create a new NextJS project by using the following command:
+**Note: To start a video stream, please use a broadcaster software like OBS/Streamyard on desktop, or Larix on mobile**
 
-```bash
-npx create-next-app -e https://github.com/shad-k/next-fe-starter
-```
+The demo app uses POST [/stream](https://livepeer.com/docs/guides/api/create-a-stream) endpoint to create a new stream.
 
-Run the development server:
+For more information on the API and the endpoints availble, please check the [Livepeer.com API documentation](https://livepeer.com/docs/guides).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**Note: You will need an API Key to use this application**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Steps to acquire an API key:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Sign up/ Log in to Livepeer.com
+- On the dashboad click on API Keys tab
+- Click on "Create" to create an API Key
 
-## Learn More
+You can enter this API key in the demo app.
 
-To learn more about Next.js, take a look at the following resources:
+### Tech note:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This app uses NextJS api routes to communicate with the Livepeer.com API. Checkout `pages/api/stream` directory for the relevant code.
