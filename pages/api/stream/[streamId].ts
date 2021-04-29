@@ -1,5 +1,10 @@
 import axios from "axios";
 
+/**
+ * calls the /stream/<id> route of Livepeer.com APIs to get the stream's status to verify that the stream is live or not.
+ * isActive: true means video segments are currently being ingested by Livepeer.com. isActive: false means the live stream is idle and no
+ * video segments are currently being ingested by Livepeer.com.
+ */
 export default async (req, res) => {
   if (req.method === "GET") {
     const authorizationHeader = req.headers && req.headers["authorization"];
@@ -10,7 +15,7 @@ export default async (req, res) => {
         {
           headers: {
             "content-type": "application/json",
-            authorization: authorizationHeader,
+            authorization: authorizationHeader, // API Key needs to be passed as a header
           },
         }
       );
